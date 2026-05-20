@@ -15,6 +15,7 @@ class Student:
                 lecturer.lecture_grades[course] = [lecturer_grades]
         else:
             return 'Ошибка'
+
     def __str__(self):
         # вычисение средней оценки
         student_grades = []
@@ -82,7 +83,7 @@ class Lecturer(Mentor):
              average = 0
         return f"Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {average}"
 
-    #методы для сравнения лекторов
+    # методы для сравнения лекторов
     def _average_grade(self):
         lecturer_grades = []
         for grades_list in self.lecture_grades.values():
