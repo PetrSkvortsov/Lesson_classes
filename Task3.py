@@ -36,6 +36,30 @@ class Student:
             finished_courses = 'Нет завершенных курсов'
         return f"Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {average}\nКурсы в процессе изучения: {student_courses}\nЗавершенные курсы: {finished_courses}"
 
+    # метод для сравнения студентов
+    def _average_grade(self):
+        student_grades = []
+        for grades_list in self.grades.values():
+            student_grades += grades_list
+        if student_grades:
+            return sum(student_grades) / len(student_grades)
+        return 0
+
+    def __gt__(self, other):
+        if not isinstance(other, Student):
+            return NotImplemented
+        return self._average_grade() > other._average_grade()
+
+    def __lt__(self, other):
+        if not isinstance(other, Student):
+            return NotImplemented
+        return self._average_grade() < other._average_grade()
+
+    def __eq__(self, other):
+        if not isinstance(other, Student):
+            return NotImplemented
+        return self._average_grade() == other._average_grade()
+
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -57,6 +81,30 @@ class Lecturer(Mentor):
         else:
              average = 0
         return f"Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {average}"
+
+    #методы для сравнения лекторов
+    def _average_grade(self):
+        lecturer_grades = []
+        for grades_list in self.lecture_grades.values():
+            lecturer_grades += grades_list
+        if lecturer_grades:
+            return sum(lecturer_grades) / len(lecturer_grades)
+        return 0
+
+    def __gt__(self, other):
+        if not isinstance(other, Lecturer):
+            return NotImplemented
+        return self._average_grade() > other._average_grade()
+
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            return NotImplemented
+        return self._average_grade() < other._average_grade()
+
+    def __eq__(self, other):
+        if not isinstance(other, Lecturer):
+            return NotImplemented
+        return self._average_grade() == other._average_grade()
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
