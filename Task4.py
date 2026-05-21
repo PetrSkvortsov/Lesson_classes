@@ -13,6 +13,7 @@ class Student:
                 lecturer.grades[course] += [lecturer_grades]
             else:
                 lecturer.grades[course] = [lecturer_grades]
+            return f"поставил {lecturer_grades} за курс {course}"
         else:
             return 'Ошибка'
     def __str__(self):
@@ -66,6 +67,7 @@ class Reviewer(Mentor):
                 student.grades[course] += [grade]
             else:
                 student.grades[course] = [grade]
+            return f"поставил {grade} по {course}"
         else:
             return 'Ошибка'
 
@@ -125,3 +127,44 @@ student.rate_lecture(lecturer2, 'Java', 7)
 
 print(average_hw_grade([student, student2], 'Python'))
 print(average_lecture_grade([lecturer, lecturer2], 'Python'))
+
+# дополнительная демонстрация
+new_student = Student('Смирнова', 'Екатерина', 'Ж')
+new_lecturer = Lecturer('Соколов', 'Дмитрий')
+new_reviewer = Reviewer('Михайлова', 'Ольга')
+
+new_student.courses_in_progress += ['Python', 'Git']
+new_lecturer.courses_attached += ['Python', 'Java']
+new_reviewer.courses_attached += ['Python', 'Git']
+
+print("\n1. Назначенные курсы:")
+print(f"Студент {new_student.name} {new_student.surname} изучает курсы: {new_student.courses_in_progress}")
+print(f"Лектор {new_lecturer.name} {new_lecturer.surname} ведет курсы: {new_lecturer.courses_attached}")
+print(f"Проверяющий {new_reviewer.name} {new_reviewer.surname} проверяет курсы: {new_reviewer.courses_attached}\n")
+
+print("\n2. Выставление оценок:")
+result1 = new_reviewer.rate_hw(new_student, 'Python', 9)
+print(f"Проверяющий {new_reviewer.name} {new_reviewer.surname} оценил(а) {new_student.name} {new_student.surname} по Python: {result1}")
+
+result2 = new_student.rate_lecture(new_lecturer, 'Python', 8)
+print(f"Студент {new_student.name} {new_student.surname} оценил(а) {new_lecturer.name} {new_lecturer.surname} по Python: {result2}")
+
+print("\n3. Негативные сценарии выставления ошибок:")
+result3 = new_reviewer.rate_hw(new_student, 'Java', 8)
+print(f"Проверяющий {new_reviewer.name} {new_reviewer.surname} пробует оценить студента по Java (студент не изучает курс): {result3}")
+
+result4 = new_reviewer.rate_hw(new_lecturer, 'Python', 7)
+print(f"Проверяющий {new_reviewer.name} {new_reviewer.surname} пробует оценить лектора: {result4}")
+
+result5 = new_student.rate_lecture(new_lecturer, 'Java', 7)
+print(f"Студент {new_student.name} {new_student.surname} пробует оценить лектора по Java (студент не изучает курс): {result5}")
+
+result6 = new_student.rate_lecture(new_reviewer, 'Python', 9)
+print(f"Студент {new_student.name} {new_student.surname} пробует оценить проверяющего: {result6}")
+
+result7 = new_student.rate_lecture(new_lecturer, 'Git', 8)
+print(f"Стуедент {new_student.name} {new_student.surname} пробует оценить по Git (лектор не ведет): {result7}")
+
+print("\n4. Оцененные люди:")
+print(f"Оценки студента {new_student.name}: {new_student.grades}")
+print(f"Оценки лектора {new_lecturer.name}: {new_lecturer.grades}")

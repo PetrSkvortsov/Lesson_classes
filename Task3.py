@@ -133,4 +133,37 @@ reviewer.courses_attached += ['Python', 'C++']
 
 print(f"{reviewer}\n")
 print(f"{lecturer}\n")
-print(f"{student}")
+print(f"{student}\n")
+
+# дополнительная демонстрация
+print("\n1. Выставление оценок студентам:")
+print(f"Оценка за Python (9): {reviewer.rate_hw(student, 'Python', 9)}")
+print(f"Оценка за Python (8): {reviewer.rate_hw(student, 'Python', 8)}")
+print(f"Оценка за Java (7): {reviewer.rate_hw(student, 'Java', 7)}")
+print(f"Ошибка (C++ не изучает): {reviewer.rate_hw(student, 'C++', 5)}")
+
+print("\n2. Выставление оценок лекторам:")
+print(f"Оценка лектору за Python (10): {student.rate_lecture(lecturer, 'Python', 10)}")
+print(f"Оценка лектору за Python (9): {student.rate_lecture(lecturer, 'Python', 9)}")
+print(f"Ошибка (лектор не ведет Java): {student.rate_lecture(lecturer, 'Java', 8)}")
+
+print("\n3. Сравнение студентов:")
+student2 = Student('Пчелкин', 'Алексей', 'М')
+student2.courses_in_progress += ['Python']
+reviewer.rate_hw(student2, 'Python', 10)
+reviewer.rate_hw(student2, 'Python', 9)
+print(f"Средняя оценка {student.name}: {student._average_grade():.1f}")
+print(f"Средняя оценка {student2.name}: {student2._average_grade():.1f}")
+print(f"{student.name} > {student2.name}: {student > student2}")
+print(f"{student.name} < {student2.name}: {student < student2}")
+print(f"{student.name} == {student2.name}: {student == student2}")
+
+print("\n4. Сравнение лекторов:")
+lecturer2 = Lecturer('Швецов', 'Сергей')
+lecturer2.courses_attached += ['Python']
+student.rate_lecture(lecturer2, 'Python', 8)
+student.rate_lecture(lecturer2, 'Python', 7)
+print(f"Средняя оценка {lecturer.name}: {lecturer._average_grade():.1f}")
+print(f"Средняя оценка {lecturer2.name}: {lecturer2._average_grade():.1f}")
+print(f"{lecturer.name} > {lecturer2.name}: {lecturer > lecturer2}")
+print(f"{lecturer.name} < {lecturer2.name}: {lecturer < lecturer2}")
