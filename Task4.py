@@ -9,16 +9,16 @@ class Student:
 
     def rate_lecture(self, lecturer, course, lecturer_grades):
         if isinstance(lecturer, Lecturer) and course in lecturer.courses_attached and course in self.courses_in_progress:
-            if course in lecturer.lecture_grades:
-                lecturer.lecture_grades[course] += [lecturer_grades]
+            if course in lecturer.grades:
+                lecturer.grades[course] += [lecturer_grades]
             else:
-                lecturer.lecture_grades[course] = [lecturer_grades]
+                lecturer.grades[course] = [lecturer_grades]
         else:
             return 'Ошибка'
     def __str__(self):
         student_grades = []
-        for gardes_list in self.grades.values():
-            student_grades += gardes_list
+        for grades_list in self.grades.values():
+            student_grades += grades_list
         if student_grades:
             average = sum(student_grades) / len(student_grades)
         else:
@@ -44,11 +44,11 @@ class Mentor:
 class Lecturer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
-        self.lecture_grades = {}
+        self.grades = {}
 
     def __str__(self):
         lecturer_grades = []
-        for grades_list in self.lecture_grades.values():
+        for grades_list in self.grades.values():
             lecturer_grades += grades_list
         if lecturer_grades:
             average = sum(lecturer_grades) / len(lecturer_grades)
@@ -86,8 +86,8 @@ def average_hw_grade(students, course):
 def average_lecture_grade(lecturers, course):
     lecturer_grades = []
     for lecturer in lecturers:
-        if course in lecturer.lecture_grades:
-            lecturer_grades += lecturer.lecture_grades[course]
+        if course in lecturer.grades:
+            lecturer_grades += lecturer.grades[course]
     if lecturer_grades:
         return sum(lecturer_grades) / len(lecturer_grades)
     return 0
@@ -97,7 +97,7 @@ reviewer = Reviewer('Пётр', 'Петров')
 student = Student('Алёхина', 'Ольга', 'Ж')
 
 # второй экзекмпляр людей
-student2 = Student('Алейсей', 'Пчелкин', 'М')
+student2 = Student('Алексей', 'Пчелкин', 'М')
 lecturer2 = Lecturer('Сергей', 'Швецов')
 reviewer2 = Reviewer('Анна', 'Сидорова')
 
