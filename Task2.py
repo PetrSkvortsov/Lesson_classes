@@ -10,10 +10,10 @@ class Student:
     # оценка лекции
     def rate_lecture(self, lecturer, course, lecturer_grades):
         if isinstance(lecturer, Lecturer) and course in lecturer.courses_attached and course in self.courses_in_progress:
-            if course in lecturer.lecture_grades:
-                lecturer.lecture_grades[course] += [lecturer_grades]
+            if course in lecturer.grades:
+                lecturer.grades[course] += [lecturer_grades]
             else:
-                lecturer.lecture_grades[course] = [lecturer_grades]
+                lecturer.grades[course] = [lecturer_grades]
         else:
             return 'Ошибка'
 
@@ -27,7 +27,7 @@ class Lecturer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
         # добавлен атрибут оценки лектора
-        self.lecture_grades = {}
+        self.grades = {}
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
@@ -56,4 +56,4 @@ print(student.rate_lecture(lecturer, 'Java', 8))     # Ошибка
 print(student.rate_lecture(lecturer, 'С++', 8))      # Ошибка
 print(student.rate_lecture(reviewer, 'Python', 6))   # Ошибка
 
-print(lecturer.lecture_grades)  # {'Python': [7]}
+print(lecturer.grades)  # {'Python': [7]}
