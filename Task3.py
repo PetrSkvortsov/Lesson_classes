@@ -37,7 +37,7 @@ class Student:
             finished_courses = 'Нет завершенных курсов'
         return f"Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {average}\nКурсы в процессе изучения: {student_courses}\nЗавершенные курсы: {finished_courses}"
 
-    # метод для сравнения студентов
+    # метод для сравнения студентов скрываем _average_grade чтобы вызов сравнения был только через знаки сравнения
     def _average_grade(self):
         student_grades = []
         for grades_list in self.grades.values():
